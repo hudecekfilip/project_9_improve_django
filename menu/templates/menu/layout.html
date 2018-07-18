@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Soda Fointain</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row justify-content-center mt-3">
+                <a href="{% url 'menu:index' %}"><h1>Soda Fointain</h1></a>
+            </div>
+            <div class="row justify-content-center">
+                {% if user.is_authenicated %}
+                <a class="btn btn-primary" href="#" role="button">Add menu
+                </a>
+                {% else %}
+                <p>Please log in to add menu</p>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>
