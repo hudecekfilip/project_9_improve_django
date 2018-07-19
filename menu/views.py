@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
@@ -17,5 +18,9 @@ def menu_detail(request, pk):
         form = forms.MenuForm(request.POST, instance=instance)
         if form.is_valid():
             instance.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "Your menu has been succesfully updated!")
             return HttpResponseRedirect(reverse('menu:index'))
     return render(request, 'menu_detail.html', {'form': form})

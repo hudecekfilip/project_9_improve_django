@@ -8,13 +8,20 @@
             <div class="row justify-content-center mt-3">
                 <a href="{% url 'menu:index' %}"><h1>Soda Fointain</h1></a>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mb-2">
                 {% if user.is_authenticated %}
                     <a class="btn btn-primary" href="#" role="button">Add menu</a>
                 {% else %}
                     <p>Please log in to add menu</p>
                 {% endif %}
             </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible justify-content-center" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             <hr class="p-2"/>
             {% block content %}{% endblock %}
         </div>
