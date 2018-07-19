@@ -17,7 +17,14 @@
                   {% endfor %}
               <hr class="my-4">
               {% endfor %}
-              <a class="btn btn-primary btn-lg" href="{% url 'menu:edit' pk=menu.pk %}" role="button">EDIT</a>
+              <div class="row">
+                  <div class='col'>
+                      <a class="btn btn-primary btn-lg" href="{% url 'menu:edit' pk=menu.pk %}" role="button">EDIT</a>
+                  </div>
+                  <div class='col'>
+                      <a class="btn btn-alert btn-lg" href="{% url 'menu:delete' pk=menu.pk %}" role="button">DELETE</a>
+                  </div>
+              </div>
             </div>
         </div>
     {% endfor %}

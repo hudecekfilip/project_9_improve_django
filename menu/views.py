@@ -24,3 +24,27 @@ def menu_detail(request, pk):
                 "Your menu has been succesfully updated!")
             return HttpResponseRedirect(reverse('menu:index'))
     return render(request, 'menu_detail.html', {'form': form})
+
+
+def create_new_menu(request):
+    form = forms.MenuForm()
+    if request.method == 'POST':
+        form = forms.MenuForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "Your menu has been succesfully created!")
+            return HttpResponseRedirect(reverse('menu:index'))
+    return render(request, 'menu_detail.html', {'form': form})
+
+
+def delete_menu(request, pk):
+    menu = models.Menu.objects.get(pk=pk)
+    menu.delete()
+    messages.add_message(
+        request,
+        messages.SUCCESS,
+        "Menu has been sucessfully deleted!")
+    return HttpResponseRedirect(reverse('menu:index'))
