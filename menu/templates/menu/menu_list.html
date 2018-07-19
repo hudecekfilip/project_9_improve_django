@@ -6,13 +6,18 @@
     {% for menu in menus %}
         <div class="col-6">
             <div class="jumbotron">
-              <h4 class="display-8">{{ menu.season }}</h1>
+              <h3><u>{{ menu.season }}</u></h3><br />
               {% for item in menu.items.all %}
-                  <p class="lead">{{ item }}</p>
-                  <hr class="my-4">
-                  <p>{{ item.description }}</p>
+                  <h6>{{ item }}</h6>
+                  <h8>{{ item.description }}</h8><br />
+                  {% for ingredient in item.ingredients.all %}
+                    <ul>
+                        <li>{{ ingredient }}</li>
+                    </ul>
+                  {% endfor %}
+              <hr class="my-4">
               {% endfor %}
-              <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+              <a class="btn btn-primary btn-lg" href="{% url 'menu:edit' pk=menu.pk %}" role="button">EDIT</a>
             </div>
         </div>
     {% endfor %}
