@@ -18,6 +18,9 @@ def menu_detail(request, pk):
     if request.method == 'POST':
         form = forms.MenuForm(request.POST, instance=instance)
         if form.is_valid():
+            # don't understand this line completely
+            # many to many
+            instance.items.set(request.POST.get('items', ''))
             instance.save()
             messages.add_message(
                 request,
