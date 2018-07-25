@@ -10,9 +10,11 @@
             </div>
             <div class="row justify-content-center mb-2">
                 {% if user.is_authenticated %}
-                    <a class="btn btn-primary" href="{% url 'menu:create_new_menu' %}" role="button">Add menu</a>
+                    <a class="btn btn-primary m-2" href="{% url 'menu:create_new_menu' %}" role="button">Add menu</a>
+                    <a class="btn btn-primary m-2" href="{% url 'menu:add_ingredient' %}" role="button">Add ingredient</a>
+                    <a class="btn btn-primary m-2" href="{% url 'menu:add_item' %}" role="button">Add item</a>
                 {% else %}
-                    <p>Please log in to add menu</p>
+                    <p>Please log in to add menu, ingredient or item</p>
                 {% endif %}
             </div>
             {% if messages %}

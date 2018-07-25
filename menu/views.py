@@ -13,6 +13,7 @@ def menu_view(request):
 
 def menu_detail(request, pk):
     instance = models.Menu.objects.get(pk=pk)
+    items = models.Item.objects.all()
     form = forms.MenuForm(instance=instance)
     if request.method == 'POST':
         form = forms.MenuForm(request.POST, instance=instance)
@@ -48,3 +49,31 @@ def delete_menu(request, pk):
         messages.SUCCESS,
         "Menu has been sucessfully deleted!")
     return HttpResponseRedirect(reverse('menu:index'))
+
+
+def add_ingredient(request):
+    form = forms.IngredientForm()
+    if request.method == 'POST':
+        form = forms.IngredientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "Ingredient has been succesfully added!")
+            return HttpResponseRedirect(reverse('menu:index'))
+    return render(request, 'menu_detail.html', {'form': form})
+
+
+def add_item(request):
+    form = forms.ItemForm()
+    if request.method == 'POST':
+        form = forms.ItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "Item has been succesfully added!")
+            return HttpResponseRedirect(reverse('menu:index'))
+    return render(request, 'menu_detail.html', {'form': form})

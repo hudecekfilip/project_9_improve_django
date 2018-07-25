@@ -10,3 +10,15 @@ class MenuForm(forms.ModelForm):
         widgets = {
             'expiration_date': SelectDateWidget()
         }
+
+
+class IngredientForm(forms.ModelForm):
+    class Meta:
+        model = models.Ingredient
+        fields = ['name']
+
+
+class ItemForm(forms.ModelForm):
+    class Meta:
+        model = models.Item
+        fields = ['name', 'description', 'standard', 'ingredients']
