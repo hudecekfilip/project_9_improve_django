@@ -7,19 +7,19 @@ from . import models
 from . import forms
 
 def menu_view(request):
-    menus = models.Menu.objects.all().prefetch_related('items__ingredients')
+    menus = models.Menu.objects.all()
     return render(request, 'menu_list.html', {'menus': menus})
 
 
 def menu_detail(request, pk):
-    instance = models.Menu.objects.prefetch_related('items').get(pk=pk)
-    items = models.Item.objects.all().prefetch_related('ingredients')
+    instance = models.Menu.objects.get(pk=pk)
+    items = models.Item.objects.all()
     form = forms.MenuForm(instance=instance)
     if request.method == 'POST':
         form = forms.MenuForm(request.POST, instance=instance)
         if form.is_valid():
             # don't understand this line completely
-            # many to many relationship
+            # many to many
             instance.items.set(request.POST.get('items', ''))
             instance.save()
             messages.add_message(
